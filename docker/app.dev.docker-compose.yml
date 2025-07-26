@@ -1,0 +1,11 @@
+---
+services:
+  pastentonne:
+    container_name: pastentonne
+    restart: unless-stopped
+    build:
+      context: ..
+      dockerfile: ./docker/app.Dockerfile
+    env_file:
+      - ../.env
+...
