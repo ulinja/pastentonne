@@ -1,0 +1,16 @@
+**/.gitignore
+**/README.md
+
+.git/
+.nuxt/
+docker/
+node_modules/
+
+.dockerignore
+.editorconfig
+.prettierignore
+.prettierrc.json
+CLAUDE.md
+colors.css
+colors.gpa
+eslint.config.mjs
