@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.data/
+.nitro/
+.nuxt/
+.output/
+dist/
+
+# Cache
+.cache/
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Generated files
+app/components/ui/
+app/lib/utils.ts
+
+# General
+*.config.js
+
+.env
+.env.*
+
+package-lock.json
+yarn.lock
+
+*.log
+logs/
+
+*.min.css
+*.min.js
+
+*.gif
+*.ico
+*.jpeg
+*.jpg
+*.png
+*.svg
+*.webp

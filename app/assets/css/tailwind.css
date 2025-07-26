@@ -1,0 +1,145 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  /* Fonts */
+  --font-sans: "Fira Sans", "Helvetica", sans-serif;
+  --font-serif: "Times New Roman", serif;
+  --font-mono: "Chivo Mono", "Courier", monospace;
+  --font-decor: "Damion", "Helvetica", sans-serif;
+
+  /* Custom color palette */
+  --color-primary-50: #fca1a1;
+  --color-primary-100: #e48282;
+  --color-primary-200: #cd6767;
+  --color-primary-300: #b64f4f;
+  --color-primary-400: #9f3a3a;
+  --color-primary-500: #872828;
+  --color-primary: #872828;
+  --color-primary-600: #701b1b;
+  --color-primary-700: #591111;
+  --color-primary-800: #420909;
+  --color-primary-900: #2b0404;
+  --color-primary-950: #140101;
+
+  --color-secondary-50: #fffcf4;
+  --color-secondary-100: #f3e5c6;
+  --color-secondary-200: #e7d09b;
+  --color-secondary-300: #dbbc73;
+  --color-secondary-400: #cfa84f;
+  --color-secondary-500: #c3962e;
+  --color-secondary: #c3962e;
+  --color-secondary-600: #a27c22;
+  --color-secondary-700: #816118;
+  --color-secondary-800: #60480f;
+  --color-secondary-900: #3f2e08;
+  --color-secondary-950: #1e1603;
+
+  --color-tertiary-50: #bed8bb;
+  --color-tertiary-100: #aacaa6;
+  --color-tertiary-200: #97bc92;
+  --color-tertiary-300: #83af7e;
+  --color-tertiary-400: #70a16a;
+  --color-tertiary-500: #5c9456;
+  --color-tertiary: #5c9456;
+  --color-tertiary-600: #4b7746;
+  --color-tertiary-700: #3b5b37;
+  --color-tertiary-800: #2c4029;
+  --color-tertiary-900: #1d271b;
+  --color-tertiary-950: #0b0f0b;
+
+  --color-foreground-50: #584f42;
+  --color-foreground-100: #4d463b;
+  --color-foreground-200: #423c33;
+  --color-foreground-300: #37322b;
+  --color-foreground-400: #2c2823;
+  --color-foreground-500: #211e1b;
+  --color-foreground-600: #1d1a16;
+  --color-foreground-700: #181612;
+  --color-foreground-800: #14120e;
+  --color-foreground-900: #100e0a;
+  --color-foreground-950: #0c0a07;
+  --color-foreground: #0c0a07;
+
+  --color-background-50: #fffbf6;
+  --color-background-100: #f5eee4;
+  --color-background: #f5eee4;
+  --color-background-200: #ebe2d2;
+  --color-background-300: #e2d5c1;
+  --color-background-400: #d8c9b1;
+  --color-background-500: #cebda1;
+  --color-background-600: #c2b196;
+  --color-background-700: #b6a58a;
+  --color-background-800: #aa997f;
+  --color-background-900: #9e8e74;
+  --color-background-950: #928269;
+
+  --color-danger-50: #ffb7b7;
+  --color-danger-100: #ff9c99;
+  --color-danger-200: #ff8179;
+  --color-danger-300: #ff6357;
+  --color-danger-400: #ff4133;
+  --color-danger-500: #f80000;
+  --color-danger: #f80000;
+  --color-danger-600: #ce0013;
+  --color-danger-700: #a30017;
+  --color-danger-800: #780016;
+  --color-danger-900: #4f0010;
+  --color-danger-950: #2a0000;
+
+  --color-success-50: #d6f5cf;
+  --color-success-100: #a5d498;
+  --color-success-200: #74b363;
+  --color-success-300: #40932c;
+  --color-success: #40932c;
+  --color-success-400: #3a8328;
+  --color-success-500: #337424;
+  --color-success-600: #2d661f;
+  --color-success-700: #26571b;
+  --color-success-800: #204a17;
+  --color-success-900: #1a3c13;
+  --color-success-950: #152f0e;
+
+  --color-warning-50: #ffe7bf;
+  --color-warning-100: #ffdb9f;
+  --color-warning-200: #ffce7f;
+  --color-warning-300: #ffc05f;
+  --color-warning-400: #ffb23d;
+  --color-warning-500: #ffa306;
+  --color-warning: #ffa306;
+  --color-warning-600: #d1870b;
+  --color-warning-700: #a56c0d;
+  --color-warning-800: #7b510e;
+  --color-warning-900: #54380c;
+  --color-warning-950: #312105;
+
+  /* Custom breakpoints */
+  --breakpoint-2xs: 380px;
+  --breakpoint-xs: 520px;
+  --breakpoint-3xl: 1334px;
+  --breakpoint-4xl: 1400px;
+  --breakpoint-5xl: 1600px;
+  --breakpoint-6xl: 1776px;
+  --breakpoint-7xl: 2000px;
+  --breakpoint-8xl: 2280px;
+  --breakpoint-9xl: 2400px;
+  --breakpoint-10xl: 2560px;
+  --breakpoint-11xl: 2880px;
+  --breakpoint-12xl: 3200px;
+  --breakpoint-13xl: 3840px;
+  --breakpoint-14xl: 4096px;
+  --breakpoint-15xl: 5120px;
+
+  /* Custom box shadows */
+  --shadow-soft-1: 2px 2px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-soft-2: 4px 4px 4px 0 rgb(0 0 0 / 0.1);
+  --shadow-soft-3: 6px 6px 6px 0 rgb(0 0 0 / 0.11);
+  --shadow-soft-4: 8px 8px 8px 0 rgb(0 0 0 / 0.12);
+  --shadow-medium-1: 3px 3px 3px 0 rgb(0 0 0 / 0.15);
+  --shadow-medium-2: 4px 4px 4px 0 rgb(0 0 0 / 0.18);
+  --shadow-medium-3: 6px 6px 6px 0 rgb(0 0 0 / 0.21);
+  --shadow-medium-4: 8px 8px 8px 0 rgb(0 0 0 / 0.24);
+  --shadow-inset-1: inset 2px 2px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-inset-2: inset 4px 4px 4px 0 rgb(0 0 0 / 0.05);
+  --shadow-inset-3: inset 4px 4px 6px 0 rgb(0 0 0 / 0.1);
+}
