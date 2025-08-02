@@ -1,4 +1,4 @@
-:8080 {
+:8000 {
 	request_body {
 		max_size 100MB
 	}

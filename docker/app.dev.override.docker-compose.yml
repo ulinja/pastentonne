@@ -1,0 +1,24 @@
+---
+services:
+  pastentonne:
+    build:
+      context: ..
+      dockerfile: ./docker/app.dev.Dockerfile
+      args:
+        TIMEZONE: ${TIMEZONE:?error}
+        UID: ${UID:?error}
+        GID: ${GID:?error}
+        NUXT_DATA_DIR: ${NUXT_DATA_DIR:?error}
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ../app:/app/app:ro
+      - ../public:/app/public:ro
+      - ../.nuxt:/app/.nuxt
+      - ../components.json:/app/components.json:ro
+      - ../nuxt.config.ts:/app/nuxt.config.ts:ro
+      - ../package-lock.json:/app/package-lock.json:ro
+      - ../package.json:/app/package.json:ro
+      - ../tsconfig.json:/app/tsconfig.json:ro
+
+      - ../.data:${NUXT_DATA_DIR:?error}

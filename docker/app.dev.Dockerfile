@@ -12,26 +12,20 @@ ARG NUXT_DATA_DIR
 ENV NUXT_DATA_DIR=${NUXT_DATA_DIR:?error}
 
 RUN apk add --no-cache \
-    caddy \
     nodejs \
     npm \
-    supervisor \
     tzdata
 
 RUN cp "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime && \
     echo ${TIMEZONE:?error} > /etc/timezone
 
-# Create group with $GID (or use existing group if GID is already taken)
 RUN (addgroup -g ${GID} pastentonne 2>/dev/null || true) && \
     adduser -u ${UID} -G "$(getent group ${GID} | cut -d: -f1)" -H -D pastentonne
 RUN mkdir -p ${NUXT_DATA_DIR} && chown -R ${UID}:${GID} ${NUXT_DATA_DIR}
 RUN mkdir /app && chown -R ${UID}:${GID} /app
-RUN mkdir -p /var/log/app && chown -R ${UID}:${GID} /var/log/app
 
 COPY --chown=${UID}:${GID}             app /app/app
-COPY --chown=${UID}:${GID}             docker/app.Caddyfile /app/Caddyfile
-COPY --chown=${UID}:${GID}             docker/app.supervisord.conf /app/supervisord.conf
-COPY --chown=${UID}:${GID} --chmod=744 docker/app.entrypoint.sh /app/entrypoint.sh
+COPY --chown=${UID}:${GID} --chmod=744 docker/app.dev.entrypoint.sh /app/entrypoint.sh
 COPY --chown=${UID}:${GID}             public /app/public
 COPY --chown=${UID}:${GID}             components.json /app/components.json
 COPY --chown=${UID}:${GID}             nuxt.config.ts /app/nuxt.config.ts
@@ -42,6 +36,6 @@ COPY --chown=${UID}:${GID}             tsconfig.json /app/tsconfig.json
 USER ${UID}:${GID}
 WORKDIR /app
 ENV npm_config_cache=/tmp/.npm
-RUN npm install && npm run build
+RUN npm install
 EXPOSE 8000
 ENTRYPOINT ["/app/entrypoint.sh"]

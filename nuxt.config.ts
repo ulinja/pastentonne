@@ -15,6 +15,10 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
+  runtimeConfig: {
+    dataDir: null,
+  },
+
   css: ["~/assets/css/tailwind.css"],
 
   shadcn: {

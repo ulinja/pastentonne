@@ -1,9 +1,11 @@
 **/.gitignore
 **/README.md
+**/.env
+**/.env.*
+**/.gitignore
 
 .git/
 .nuxt/
-docker/
 node_modules/
 
 .dockerignore

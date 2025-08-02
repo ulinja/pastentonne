@@ -19,13 +19,15 @@ The following rules must **ALWAYS** be followed:
 
 ### Development Commands
 
+Start the development server on `http://localhost:8000`:
+
 ```bash
-# Install dependencies
-npm install
+docker compose -f docker/app.docker-compose.yml -f docker/app.dev.override.docker-compose.yml --env-file .env up --build --force-recreate --remove-orphans
+```
 
-# Build
-npm run build
+To run linting or formatting:
 
+```
 # Lint
 npm run lint
 npm run lint:fix
