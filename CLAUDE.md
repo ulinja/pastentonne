@@ -19,10 +19,17 @@ The following rules must **ALWAYS** be followed:
 
 ### Development Commands
 
-Start the development server on `http://localhost:8000`:
+Start the development docker stack on `http://localhost:8000`:
 
 ```bash
 docker compose -f docker/app.docker-compose.yml -f docker/app.dev.override.docker-compose.yml --env-file .env up --build --force-recreate --remove-orphans
+```
+
+Or run the Nuxt dev server locally:
+```bash
+sed 's/^\(UID\|GID\|TIMEZONE\)=.*$//' .env > .env.local
+. .env.local
+npm run dev
 ```
 
 To run linting or formatting:

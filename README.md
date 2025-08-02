@@ -43,3 +43,15 @@ Start the development docker stack on `http://localhost:8000`:
 ```bash
 docker compose -f docker/app.docker-compose.yml -f docker/app.dev.override.docker-compose.yml --env-file .env up --build --force-recreate --remove-orphans
 ```
+
+To run the nuxt dev server locally, i.e. using `npm run dev` outside of Docker *(not recommended)*,
+first create an `.env.local` file without the `UID`, `GID` and `TIMEZONE` entries:
+```bash
+sed 's/^\(UID\|GID\|TIMEZONE\)=.*$//' .env > .env.local
+```
+
+Then, source your `.env.local` file and run `npm run dev`:
+```bash
+. .env.local
+npm run dev
+```
