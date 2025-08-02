@@ -9,6 +9,11 @@ services:
         UID: ${UID:?error}
         GID: ${GID:?error}
         NUXT_DATA_DIR: ${NUXT_DATA_DIR:?error}
+        NUXT_AUTH_ORIGIN: ${NUXT_AUTH_ORIGIN:?error}
+        NUXT_AUTH_SECRET: ${NUXT_AUTH_SECRET:?error}
+        NUXT_AUTHENTIK_CLIENT_ID: ${NUXT_AUTHENTIK_CLIENT_ID:?error}
+        NUXT_AUTHENTIK_CLIENT_SECRET: ${NUXT_AUTHENTIK_CLIENT_SECRET:?error}
+        NUXT_AUTHENTIK_ISSUER: ${NUXT_AUTHENTIK_ISSUER:?error}
     ports:
       - "127.0.0.1:8000:8000"
     volumes:
