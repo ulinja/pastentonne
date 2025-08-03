@@ -2,14 +2,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
-  modules: [
-    "@nuxt/eslint",
-    "@nuxt/fonts",
-    "@nuxt/icon",
-    "@pinia/nuxt",
-    "shadcn-nuxt",
-    "@sidebase/nuxt-auth",
-  ],
+  modules: ["@nuxt/eslint", "@nuxt/fonts", "@nuxt/icon", "@pinia/nuxt", "shadcn-nuxt", "nuxt-auth-utils"],
 
   devServer: {
     host: "0.0.0.0",
@@ -23,12 +16,15 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    dataDir: "./.data",
-    authOrigin: "",
-    authSecret: "",
-    authentikClientId: "",
-    authentikClientSecret: "",
-    authentikIssuer: "",
+    dataDir: "",
+    oauth: {
+      authentik: {
+        clientId: "",
+        clientSecret: "",
+        domain: "",
+        redirectURL: "",
+      },
+    },
   },
 
   css: ["~/assets/css/tailwind.css"],
@@ -36,18 +32,6 @@ export default defineNuxtConfig({
   shadcn: {
     prefix: "",
     componentDir: "./app/components/ui",
-  },
-
-  auth: {
-    isEnabled: true,
-    originEnvKey: "NUXT_AUTH_ORIGIN",
-    globalAppMiddleware: true,
-    provider: {
-      type: "authjs",
-      trustHost: false,
-      defaultProvider: "authentik",
-      addDefaultCallbackUrl: true,
-    },
   },
 
   icon: {

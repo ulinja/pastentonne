@@ -9,16 +9,17 @@ services:
         UID: ${UID:?error}
         GID: ${GID:?error}
         NUXT_DATA_DIR: ${NUXT_DATA_DIR:?error}
-        NUXT_AUTH_ORIGIN: ${NUXT_AUTH_ORIGIN:?error}
-        NUXT_AUTH_SECRET: ${NUXT_AUTH_SECRET:?error}
-        NUXT_AUTHENTIK_CLIENT_ID: ${NUXT_AUTHENTIK_CLIENT_ID:?error}
-        NUXT_AUTHENTIK_CLIENT_SECRET: ${NUXT_AUTHENTIK_CLIENT_SECRET:?error}
-        NUXT_AUTHENTIK_ISSUER: ${NUXT_AUTHENTIK_ISSUER:?error}
+        NUXT_SESSION_PASSWORD: ${NUXT_SESSION_PASSWORD:?error}
+        NUXT_OAUTH_AUTHENTIK_CLIENT_ID: ${NUXT_OAUTH_AUTHENTIK_CLIENT_ID:?error}
+        NUXT_OAUTH_AUTHENTIK_CLIENT_SECRET: ${NUXT_OAUTH_AUTHENTIK_CLIENT_SECRET:?error}
+        NUXT_OAUTH_AUTHENTIK_DOMAIN: ${NUXT_OAUTH_AUTHENTIK_DOMAIN:?error}
+        NUXT_OAUTH_AUTHENTIK_REDIRECT_URL: ${NUXT_OAUTH_AUTHENTIK_REDIRECT_URL:?error}
     ports:
       - "127.0.0.1:8000:8000"
     volumes:
       - ../app:/app/app:ro
       - ../public:/app/public:ro
+      - ../server:/app/server:ro
       - ../.nuxt:/app/.nuxt
       - ../components.json:/app/components.json:ro
       - ../nuxt.config.ts:/app/nuxt.config.ts:ro

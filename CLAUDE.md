@@ -26,6 +26,7 @@ docker compose -f docker/app.docker-compose.yml -f docker/app.dev.override.docke
 ```
 
 Or run the Nuxt dev server locally:
+
 ```bash
 sed 's/^\(UID\|GID\|TIMEZONE\)=.*$//' .env > .env.local
 . .env.local
@@ -46,11 +47,15 @@ npm run format:fix
 
 ### Frontend Architecture
 
-The frontend is built with Nuxt 4.
+The app is built with Nuxt 4.
 
-- `frontend/app/components/`: Reusable Vue components organized by feature
-- `frontend/app/pages/`: File-based routing with nested structures
-- `frontend/app/stores/`: Pinia stores for state management
+- `app/app.vue`: App's main entry point
+- `app/components/`: Reusable Vue components organized by feature
+- `app/pages/`: File-based routing with nested structures
+- `app/layouts/`: Reusable app layouts
+- `app/assets/`: Bundled assets
+- `app/utils/`: Custom utilities or Nuxt-module-provided utils
+- `app/stores/`: Pinia stores for state management
 
 ## Coding Conventions
 
