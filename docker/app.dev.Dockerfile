@@ -38,6 +38,7 @@ COPY --chown=${UID}:${GID}             app /app/app
 COPY --chown=${UID}:${GID} --chmod=744 docker/app.dev.entrypoint.sh /app/entrypoint.sh
 COPY --chown=${UID}:${GID}             public /app/public
 COPY --chown=${UID}:${GID}             server /app/server
+COPY --chown=${UID}:${GID}             shared /app/shared
 COPY --chown=${UID}:${GID}             components.json /app/components.json
 COPY --chown=${UID}:${GID}             nuxt.config.ts /app/nuxt.config.ts
 COPY --chown=${UID}:${GID}             package-lock.json /app/package-lock.json

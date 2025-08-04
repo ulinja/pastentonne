@@ -20,6 +20,7 @@ services:
       - ../app:/app/app:ro
       - ../public:/app/public:ro
       - ../server:/app/server:ro
+      - ../shared:/app/shared:ro
       - ../.nuxt:/app/.nuxt
       - ../components.json:/app/components.json:ro
       - ../nuxt.config.ts:/app/nuxt.config.ts:ro
