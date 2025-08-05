@@ -10,8 +10,8 @@ const { loggedIn, user } = useUserSession();
     <div v-else class="flex flex-col items-center justify-center gap-4">
       <h1 class="text-center">Welcome To Pastentonne.</h1>
       <p class="text-center">You are not logged in. Please sign in to continue.</p>
-      <a class="text-center flex items-center justify-center" href="/auth/authentik">
-        <Button class="items-center justify-center flex gap-2">
+      <a class="flex items-center justify-center text-center" href="/auth/authentik">
+        <Button class="flex items-center justify-center gap-2">
           <AppLogoAuthentik class="size-4 fill-current" />
           <p>Log In with Authentik</p>
         </Button>

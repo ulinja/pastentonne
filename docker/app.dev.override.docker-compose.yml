@@ -23,6 +23,7 @@ services:
       - ../shared:/app/shared:ro
       - ../.nuxt:/app/.nuxt
       - ../components.json:/app/components.json:ro
+      - ../drizzle.config.ts:/app/drizzle.config.ts:ro
       - ../nuxt.config.ts:/app/nuxt.config.ts:ro
       - ../package-lock.json:/app/package-lock.json:ro
       - ../package.json:/app/package.json:ro

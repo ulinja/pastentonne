@@ -49,16 +49,16 @@ Start the development docker stack on `http://localhost:8000`:
 docker compose -f docker/app.docker-compose.yml -f docker/app.dev.override.docker-compose.yml --env-file .env up --build --force-recreate --remove-orphans
 ```
 
-To run the nuxt dev server locally, i.e. using `npm run dev` outside of Docker _(not recommended)_,
-first create an `.env.local` file without the `UID`, `GID` and `TIMEZONE` entries:
+To create the database or apply schema changes, run:
 
 ```bash
-sed 's/^\(UID\|GID\|TIMEZONE\)=.*$//' .env > .env.local
+docker exec -it pastentonne npm run db:push
 ```
 
-Then, source your `.env.local` file and run `npm run dev`:
+You _can_ run the nuxt dev server locally, i.e. with `npm run dev` outside of Docker, but this is _(not recommended)_.
+To do this, make sure you first set `$NUXT_DATA_DIR` in your `.env` file to `./data`, otherwise you will run into
+permission errors. Then, start the Nuxt dev server:
 
 ```bash
-. .env.local
 npm run dev
 ```
