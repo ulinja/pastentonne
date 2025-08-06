@@ -11,6 +11,7 @@ declare module "#auth-utils" {
     id: string; // Session ID (UUID4)
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   export interface SecureSessionData {
     // Add your own fields
   }

@@ -39,14 +39,14 @@ async function onSubmit(): Promise<void> {
 </script>
 
 <template>
-  <form @submit.prevent="onSubmit" class="flex w-full max-w-6xl grow flex-col justify-center self-center">
+  <form class="flex w-full max-w-6xl grow flex-col justify-center self-center" @submit.prevent="onSubmit">
     <h1 class="w-full">New Textpaste</h1>
     <div class="flex max-w-xl items-end justify-center gap-2">
       <div class="mt-8 flex grow flex-col justify-center gap-1">
         <Label for="paste-name">Paste Name</Label>
-        <Input id="paste-name" type="text" required v-model="pasteName" />
+        <Input id="paste-name" v-model="pasteName" type="text" required />
       </div>
-      <Button @click="onClickRandomizeName" type="button">
+      <Button type="button" @click="onClickRandomizeName">
         <Icon name="mdi:dice-multiple" class="text-primary-foreground size-6" />
       </Button>
     </div>

@@ -50,7 +50,7 @@ export default defineEventHandler(async (event): Promise<string> => {
   const verbs = await getWordsFromDataFile("VERBS");
   const nouns = await getWordsFromDataFile("NOUNS");
 
-  let randomName = generateName(adjectives, verbs, nouns);
+  const randomName = generateName(adjectives, verbs, nouns);
   // TODO: make sure name is not taken already
 
   return randomName;

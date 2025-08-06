@@ -13,7 +13,7 @@ if (!textPasteId)
   });
 
 const { data: textPaste, error } = await useLazyFetch(`/api/paste/text/${textPasteId}`, {
-  transform: (data: any) => ({
+  transform: (data: unknown) => ({
     ...data,
     createdAt: new Date(data?.createdAt),
   }),

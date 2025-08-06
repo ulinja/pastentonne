@@ -7,18 +7,6 @@ interface AuthentikUser {
   preferred_username: string;
 }
 
-async function userExists(
-  providerName: (typeof tables.user.oauthServer.enumValues)[number],
-  sub: string,
-): Promise<boolean> {
-  const result = await useDrizzle()
-    .select()
-    .from(tables.user)
-    .where(and(eq(tables.user.oauthServer, providerName), eq(tables.user.oauthSub, sub)))
-    .limit(1);
-  return result.length > 0;
-}
-
 async function getUser(
   providerName: (typeof tables.user.oauthServer.enumValues)[number],
   sub: string,
@@ -47,7 +35,7 @@ async function createUser(user: AuthentikUser): Promise<DbUser> {
 }
 
 export default defineOAuthAuthentikEventHandler({
-  async onSuccess(event: H3Event, { user, tokens }: { user: AuthentikUser; tokens: any }) {
+  async onSuccess(event: H3Event, { user }: { user: AuthentikUser; tokens: unknown }) {
     let dbUser = await getUser("AUTHENTIK", user.sub);
     if (dbUser === null) {
       dbUser = await createUser(user);

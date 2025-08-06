@@ -46,7 +46,7 @@ async function onClickLogOut(): Promise<void> {
         <AppLogoPastentonne class="ms-4 w-8 md:ms-0 md:w-10" />
         <h1 class="font-decor text-primary-800/75 text-2xl md:text-4xl">PastenTonne</h1>
       </NuxtLink>
-      <Button variant="ghost" @click="onClickMenuButton" class="flex items-center justify-center md:hidden">
+      <Button variant="ghost" class="flex items-center justify-center md:hidden" @click="onClickMenuButton">
         <Icon v-if="menuIsOpen" name="mdi:window-close" class="size-8" />
         <Icon v-else name="mdi:hamburger" class="size-8" />
       </Button>
@@ -54,7 +54,7 @@ async function onClickLogOut(): Promise<void> {
     <div v-if="!screenIsSmall || menuIsOpen" class="flex items-center justify-center">
       <div v-if="loggedIn" class="flex items-center justify-center gap-4">
         <p class="text-center text-sm font-light md:text-start md:text-base">Logged in as {{ user.email }}</p>
-        <Button @click="onClickLogOut" variant="outline"> Sign Out </Button>
+        <Button variant="outline" @click="onClickLogOut"> Sign Out </Button>
       </div>
       <div v-else class="flex items-center justify-center gap-4">
         <a href="/auth/authentik" class="flex items-center justify-center">
