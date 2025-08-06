@@ -51,6 +51,7 @@ The app is built with Nuxt 4.
 
 - `app/app.vue`: App's main entry point
 - `app/components/`: Reusable Vue components organized by feature
+- `app/components/ui`: Components added by shadcn-vue (**NEVER** edit these directly)
 - `app/pages/`: File-based routing with nested structures
 - `app/layouts/`: Reusable app layouts
 - `app/assets/`: Bundled assets
