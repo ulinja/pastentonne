@@ -1,5 +1,3 @@
-import type { DbTextPaste } from "~/shared/types/auth";
-
 export async function getTextPaste(id: string): Promise<DbTextPaste | null> {
   const result = await useDrizzle().select().from(tables.textPaste).where(eq(tables.textPaste.id, id)).limit(1);
   if (result.length > 0) return result[0];
@@ -24,7 +22,7 @@ export async function createTextPaste(userId: string, name: string, content: str
   return result[0];
 }
 
-export async function pasteNameAlreadyTaken(userId: string, pasteName: string): Promise<boolean> {
+export async function textPasteNameAlreadyTaken(userId: string, pasteName: string): Promise<boolean> {
   const result = await useDrizzle()
     .select()
     .from(tables.textPaste)

@@ -1,6 +1,8 @@
 import { access, readFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
+import { v4 as uuid4 } from "uuid";
 import randPick from "#shared/rand-pick";
+import { textPasteNameAlreadyTaken } from "~~/server/utils/database/text-paste";
 
 type FileEnum = "ADJECTIVES" | "VERBS" | "NOUNS";
 
@@ -45,13 +47,23 @@ function generateName(adjectives: string[], verbs: string[], nouns: string[]): s
 
 export default defineEventHandler(async (event): Promise<string> => {
   await assertIsAuthenticated(event);
+  const { user } = await getUserSession(event);
 
   const adjectives = await getWordsFromDataFile("ADJECTIVES");
   const verbs = await getWordsFromDataFile("VERBS");
   const nouns = await getWordsFromDataFile("NOUNS");
 
-  const randomName = generateName(adjectives, verbs, nouns);
-  // TODO: make sure name is not taken already
+  let randomName = uuid4();
+  const MAX_ITERATIONS = 1000;
+  for (let i = 0; i < MAX_ITERATIONS; i++) {
+    let generatedName = generateName(adjectives, verbs, nouns);
+    if (await textPasteNameAlreadyTaken(user.id, generatedName)) {
+      continue;
+    } else {
+      randomName = generatedName;
+      break;
+    }
+  }
 
   return randomName;
 });
