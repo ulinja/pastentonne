@@ -1,9 +1,3 @@
-async function getTextPaste(id: string): Promise<DbTextPaste | null> {
-  const result = await useDrizzle().select().from(tables.textPaste).where(eq(tables.textPaste.id, id)).limit(1);
-  if (result.length > 0) return result[0];
-  return null;
-}
-
 export default defineEventHandler(async (event): Promise<DbTextPaste> => {
   await assertIsAuthenticated(event);
   const { user } = await getUserSession(event);

@@ -1,24 +1,3 @@
-async function pasteNameAlreadyTaken(userId: string, pasteName: string): Promise<boolean> {
-  const result = await useDrizzle()
-    .select()
-    .from(tables.textPaste)
-    .where(and(eq(tables.textPaste.userId, userId), eq(tables.textPaste.name, pasteName)))
-    .limit(1);
-  return result.length > 0;
-}
-
-async function createTextPaste(userId: string, name: string, content: string): Promise<DbTextPaste> {
-  const result = await useDrizzle()
-    .insert(tables.textPaste)
-    .values({
-      userId: userId,
-      name: name,
-      content: content,
-    })
-    .returning();
-  return result[0];
-}
-
 export default defineEventHandler(async (event): Promise<DbTextPaste> => {
   await assertIsAuthenticated(event);
   const { user } = await getUserSession(event);
