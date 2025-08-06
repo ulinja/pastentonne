@@ -4,6 +4,17 @@ definePageMeta({
 });
 
 const pasteName = ref<string | undefined>(undefined);
+
+async function initialFetchRandomName(): Promise<void> {
+  const { data } = await useFetch("/api/paste/random-name");
+  if (data.value) pasteName.value = data.value
+}
+
+async function onClickRandomizeName(): Promise<void> {
+  pasteName.value = await $fetch("/api/paste/random-name");
+}
+
+await initialFetchRandomName();
 </script>
 
 <template>
