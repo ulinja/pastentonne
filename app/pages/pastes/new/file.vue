@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+definePageMeta({
+  middleware: ["logged-in-only"],
+});
+</script>
 
 <template>
   <form class="flex max-w-3xl grow flex-col justify-center self-center">

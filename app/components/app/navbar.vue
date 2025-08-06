@@ -30,6 +30,11 @@ onBeforeUnmount(() => {
 function onClickMenuButton(): void {
   menuIsOpen.value = !menuIsOpen.value;
 }
+
+async function onClickLogOut(): Promise<void> {
+  await clear();
+  await navigateTo("/", { external: true });
+}
 </script>
 
 <template>
@@ -49,7 +54,7 @@ function onClickMenuButton(): void {
     <div v-if="!screenIsSmall || menuIsOpen" class="flex items-center justify-center">
       <div v-if="loggedIn" class="flex items-center justify-center gap-4">
         <p class="text-center text-sm font-light md:text-start md:text-base">Logged in as {{ user.email }}</p>
-        <Button @click="clear" variant="outline"> Sign Out </Button>
+        <Button @click="onClickLogOut" variant="outline"> Sign Out </Button>
       </div>
       <div v-else class="flex items-center justify-center gap-4">
         <a href="/auth/authentik" class="flex items-center justify-center">

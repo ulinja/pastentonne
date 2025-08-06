@@ -1,9 +1,9 @@
 declare module "#auth-utils" {
   export interface User {
-    id: string; // Authentik `sub` ID
-    email: string; // Authentik user's email address
-    name: string; // User's given name
-    username: string; // User's username
+    id: string;
+    email: string;
+    name: string;
+    username: string;
   }
 
   export interface Session {
