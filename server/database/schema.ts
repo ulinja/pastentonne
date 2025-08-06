@@ -37,7 +37,7 @@ export const textPaste = sqliteTable(
       .$defaultFn(() => uuid7()),
     userId: text("user_id").references(() => user.id, { onDelete: "cascade" }).notNull(),
     name: text("name").notNull(),
-    contents: text("contents").notNull(),
+    content: text("content").notNull(),
     createdAt: integer("created_at", { mode: "timestamp_ms" }).defaultNow().notNull(),
   },
   (table) => [
