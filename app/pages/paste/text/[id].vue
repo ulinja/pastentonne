@@ -27,7 +27,12 @@ if (error.value) {
   });
 }
 
-function onClickDelete() {}
+async function onConfirmDelete() {
+  await $fetch(`/api/paste/text/${textPasteId}`, {
+    method: "DELETE",
+  });
+  await navigateTo("/");
+}
 </script>
 
 <template>
@@ -38,10 +43,28 @@ function onClickDelete() {}
           <h1 class="w-full">{{ textPaste.name }}</h1>
           <p class="mt-2 w-full text-xs">Created on {{ formatDate(textPaste.createdAt) }}</p>
         </div>
-        <Button @click="onClickDelete" class="flex items-center justify-center">
-          <Icon name="mdi:trash-can" class="size-4" />
-          <p>Delete Paste</p>
-        </Button>
+        <Dialog>
+          <DialogTrigger as-child>
+            <Button type="button" class="flex items-center justify-center">
+              <Icon name="mdi:trash-can" class="size-4" />
+              <p>Delete Paste</p>
+            </Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle class="text-danger">Delete Paste</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to delete this Paste?
+                <span class="font-semibold"> This action cannot be undone! </span>
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter @click="onConfirmDelete">
+              <DialogClose as-child>
+                <Button class="bg-danger flex items-center justify-center"> Delete Paste </Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
       <code class="bg-foreground-100 mt-4 w-full grow overflow-x-auto rounded-lg p-4 whitespace-pre text-white">
         {{ textPaste.content }}

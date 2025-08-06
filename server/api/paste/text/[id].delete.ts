@@ -4,6 +4,12 @@ async function getTextPaste(id: string): Promise<DbTextPaste | null> {
   return null;
 }
 
+async function deleteTextPaste(id: string): Promise<DbTextPaste | null> {
+  const result = await useDrizzle().delete(tables.textPaste).where(eq(tables.textPaste.id, id)).returning();
+  if (result.length > 0) return result[0];
+  return null;
+}
+
 export default defineEventHandler(async (event): Promise<DbTextPaste> => {
   await assertIsAuthenticated(event);
   const { user } = await getUserSession(event);
@@ -16,7 +22,7 @@ export default defineEventHandler(async (event): Promise<DbTextPaste> => {
       statusMessage: "Must specify id.",
     });
   }
-  const textPaste = await getTextPaste(id);
+  let textPaste = await getTextPaste(id);
   if (textPaste === null) {
     throw createError({
       statusCode: 404,
@@ -30,5 +36,12 @@ export default defineEventHandler(async (event): Promise<DbTextPaste> => {
     });
   }
 
+  textPaste = await deleteTextPaste(textPaste.id);
+  if (textPaste === null) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: "An unknown error occurred.",
+    });
+  }
   return textPaste;
 });
