@@ -35,7 +35,9 @@ export const textPaste = sqliteTable(
     id: text("id")
       .primaryKey()
       .$defaultFn(() => uuid7()),
-    userId: text("user_id").references(() => user.id, { onDelete: "cascade" }).notNull(),
+    userId: text("user_id")
+      .references(() => user.id, { onDelete: "cascade" })
+      .notNull(),
     name: text("name").notNull(),
     content: text("content").notNull(),
     createdAt: integer("created_at", { mode: "timestamp_ms" }).defaultNow().notNull(),
@@ -47,7 +49,7 @@ export const textPaste = sqliteTable(
     index("text_paste_created_at_idx").on(table.createdAt),
   ],
 );
-export const textPasteRelations = relations(textPaste, ({one}) => ({
+export const textPasteRelations = relations(textPaste, ({ one }) => ({
   user: one(user, {
     fields: [textPaste.userId],
     references: [user.id],
@@ -60,7 +62,9 @@ export const filePaste = sqliteTable(
     id: text("id")
       .primaryKey()
       .$defaultFn(() => uuid7()),
-    userId: text("user_id").references(() => user.id, { onDelete: "cascade" }).notNull(),
+    userId: text("user_id")
+      .references(() => user.id, { onDelete: "cascade" })
+      .notNull(),
     name: text("name").notNull(),
     createdAt: integer("created_at", { mode: "timestamp_ms" }).defaultNow().notNull(),
   },
@@ -71,7 +75,7 @@ export const filePaste = sqliteTable(
     index("file_paste_created_at_idx").on(table.createdAt),
   ],
 );
-export const filePasteRelations = relations(filePaste, ({one, many }) => ({
+export const filePasteRelations = relations(filePaste, ({ one, many }) => ({
   user: one(user, {
     fields: [filePaste.userId],
     references: [user.id],
@@ -85,7 +89,9 @@ export const file = sqliteTable(
     id: text("id")
       .primaryKey()
       .$defaultFn(() => uuid7()),
-    filePasteId: text("file_paste_id").references(() => filePaste.id, { onDelete: "cascade" }).notNull(),
+    filePasteId: text("file_paste_id")
+      .references(() => filePaste.id, { onDelete: "cascade" })
+      .notNull(),
     name: text("name").notNull(),
   },
   (table) => [
@@ -94,7 +100,7 @@ export const file = sqliteTable(
     index("file_name_idx").on(table.name),
   ],
 );
-export const fileRelations = relations(file, ({one}) => ({
+export const fileRelations = relations(file, ({ one }) => ({
   filePaste: one(filePaste, {
     fields: [file.filePasteId],
     references: [filePaste.id],

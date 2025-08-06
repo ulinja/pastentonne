@@ -1,4 +1,4 @@
-import type { H3Event, H3Error } from 'h3';
+import type { H3Event, H3Error } from "h3";
 
 interface AuthentikUser {
   sub: string;
@@ -8,40 +8,41 @@ interface AuthentikUser {
 }
 
 async function userExists(
-  providerName: typeof tables.user.oauthServer.enumValues[number],
+  providerName: (typeof tables.user.oauthServer.enumValues)[number],
   sub: string,
 ): Promise<boolean> {
-  const result = await useDrizzle().select().from(tables.user).where(
-    and(
-      eq(tables.user.oauthServer, providerName),
-      eq(tables.user.oauthSub, sub),
-    )
-  ).limit(1);
+  const result = await useDrizzle()
+    .select()
+    .from(tables.user)
+    .where(and(eq(tables.user.oauthServer, providerName), eq(tables.user.oauthSub, sub)))
+    .limit(1);
   return result.length > 0;
 }
 
 async function getUser(
-  providerName: typeof tables.user.oauthServer.enumValues[number],
+  providerName: (typeof tables.user.oauthServer.enumValues)[number],
   sub: string,
 ): Promise<DbUser | null> {
-  const result = await useDrizzle().select().from(tables.user).where(
-    and(
-      eq(tables.user.oauthServer, providerName),
-      eq(tables.user.oauthSub, sub),
-    )
-  ).limit(1);
+  const result = await useDrizzle()
+    .select()
+    .from(tables.user)
+    .where(and(eq(tables.user.oauthServer, providerName), eq(tables.user.oauthSub, sub)))
+    .limit(1);
   if (result.length > 0) return result[0];
   return null;
 }
 
 async function createUser(user: AuthentikUser): Promise<DbUser> {
-  const result = await useDrizzle().insert(tables.user).values({
-    oauthServer: "AUTHENTIK",
-    oauthSub: user.sub,
-    email: user.email,
-    username: user.preferred_username,
-    name: user.name,
-  }).returning();
+  const result = await useDrizzle()
+    .insert(tables.user)
+    .values({
+      oauthServer: "AUTHENTIK",
+      oauthSub: user.sub,
+      email: user.email,
+      username: user.preferred_username,
+      name: user.name,
+    })
+    .returning();
   return result[0];
 }
 
@@ -51,9 +52,12 @@ export default defineOAuthAuthentikEventHandler({
     if (dbUser === null) {
       dbUser = await createUser(user);
     } else {
-      await useDrizzle().update(tables.user).set({
-        lastLoginAt: new Date()
-      }).where(eq(tables.user.id, dbUser.id));
+      await useDrizzle()
+        .update(tables.user)
+        .set({
+          lastLoginAt: new Date(),
+        })
+        .where(eq(tables.user.id, dbUser.id));
     }
     await setUserSession(event, {
       user: {

@@ -15,7 +15,7 @@ export function useDrizzle() {
   });
 }
 
-export type DbUser      = typeof schema.user.$inferSelect;
+export type DbUser = typeof schema.user.$inferSelect;
 export type DbTextPaste = typeof schema.textPaste.$inferSelect;
 export type DbFilePaste = typeof schema.filePaste.$inferSelect;
-export type DbFile      = typeof schema.file.$inferSelect;
+export type DbFile = typeof schema.file.$inferSelect;
