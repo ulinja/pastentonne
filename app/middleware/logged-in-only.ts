@@ -3,7 +3,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (!loggedIn.value)
     abortNavigation(
       createError({
-        status: 401,
+        statusCode: 401,
         statusMessage: "You must be logged in to view this page.",
       }),
     );

@@ -19,12 +19,13 @@ const { data: textPaste, error } = await useLazyFetch(`/api/paste/text/${textPas
   }),
 });
 
-if (error.value)
+if (error.value) {
   throw createError({
-    status: error.value.status,
+    statusCode: error.value.statusCode,
     statusMessage: error.value.statusMessage,
     fatal: true,
   });
+}
 
 function onClickDelete() {}
 </script>

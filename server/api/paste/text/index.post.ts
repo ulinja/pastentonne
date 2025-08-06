@@ -31,17 +31,17 @@ export default defineEventHandler(async (event): Promise<DbTextPaste> => {
 
   if (name.length === 0)
     throw createError({
-      status: 400,
+      statusCode: 400,
       statusMessage: "name cannot be empty",
     });
   if (content.length === 0)
     throw createError({
-      status: 400,
+      statusCode: 400,
       statusMessage: "content cannot be empty",
     });
   if (await pasteNameAlreadyTaken(user.id, name))
     throw createError({
-      status: 400,
+      statusCode: 400,
       statusMessage: "name is already taken.",
     });
 
