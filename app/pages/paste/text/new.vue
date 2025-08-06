@@ -10,9 +10,6 @@ const pasteContent = ref<string | undefined>(undefined);
 
 const errorMessage = ref<string | null>(null);
 
-const { data: randomName } = await useLazyFetch("/api/paste/random-name");
-if (randomName.value) pasteName.value = randomName.value;
-
 async function onClickRandomizeName(): Promise<void> {
   pasteName.value = await $fetch("/api/paste/random-name");
 }
@@ -36,6 +33,10 @@ async function onSubmit(): Promise<void> {
     }
   }
 }
+
+onMounted(async () => {
+  await onClickRandomizeName();
+});
 </script>
 
 <template>
