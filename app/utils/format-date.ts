@@ -1,6 +1,6 @@
-export default function (date: Date): string {
+export default function (date: Date, showWeekday: boolean = true): string {
   const format = Intl.DateTimeFormat("en-GB", {
-    weekday: "short",
+    weekday: showWeekday ? "short" : undefined,
     year: "2-digit",
     month: "2-digit",
     day: "2-digit",

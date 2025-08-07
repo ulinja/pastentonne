@@ -15,7 +15,7 @@ async function onConfirmDelete() {
 <template>
   <Dialog>
     <DialogTrigger as-child>
-      <Button type="button" variant="ghost" class="hover:bg-danger flex items-center justify-center hover:text-white">
+      <Button type="button" variant="ghost" class="hover:bg-danger hover:text-white">
         <Icon name="mdi:trash-can" class="size-3" />
       </Button>
     </DialogTrigger>
