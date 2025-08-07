@@ -1,20 +1,25 @@
 <script setup lang="ts">
 const { loggedIn, user } = useUserSession();
 
-const { data: textPastes, error: fetchError } = await useLazyFetch(`/api/paste/text`, {
-  transform: (data): DbTextPaste[] => {
-    return data.map((paste) => ({
-      ...paste,
-      createdAt: new Date(paste.createdAt),
-    }));
-  },
-});
-if (fetchError.value) {
-  throw createError({
-    statusCode: fetchError.value.statusCode,
-    statusText: fetchError.value.statusText,
-    fatal: true,
+const textPastes = ref<DbTextPaste[] | null>();
+
+if (loggedIn.value) {
+  const { data, error } = await useFetch(`/api/paste/text`, {
+    transform: (data): DbTextPaste[] => {
+      return data.map((paste) => ({
+        ...paste,
+        createdAt: new Date(paste.createdAt),
+      }));
+    },
   });
+  if (error.value) {
+    throw createError({
+      statusCode: error.value.statusCode,
+      statusText: error.value.statusText,
+      fatal: true,
+    });
+  }
+  textPastes.value = data.value;
 }
 </script>
 

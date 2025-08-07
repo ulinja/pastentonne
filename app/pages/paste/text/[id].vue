@@ -12,8 +12,8 @@ if (!textPasteId)
     fatal: true,
   });
 
-const { data: textPaste, error } = await useLazyFetch(`/api/paste/text/${textPasteId}`, {
-  transform: (data: unknown) => ({
+const { data: textPaste, error } = await useFetch(`/api/paste/text/${textPasteId}`, {
+  transform: (data) => ({
     ...data,
     createdAt: new Date(data?.createdAt),
   }),
