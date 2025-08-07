@@ -1,5 +1,21 @@
 <script setup lang="ts">
 const { loggedIn, user } = useUserSession();
+
+const { data: textPastes, error: fetchError } = await useLazyFetch(`/api/paste/text`, {
+  transform: (data): DbTextPaste[] => {
+    return data.map((paste) => ({
+      ...paste,
+      createdAt: new Date(paste.createdAt),
+    }));
+  },
+});
+if (fetchError.value) {
+  throw createError({
+    statusCode: fetchError.value.statusCode,
+    statusText: fetchError.value.statusText,
+    fatal: true,
+  });
+}
 </script>
 
 <template>
@@ -20,6 +36,7 @@ const { loggedIn, user } = useUserSession();
           </Button>
         </NuxtLink>
       </div>
+      <PasteList v-if="textPastes" :pastes="textPastes" class="mt-8" />
     </div>
     <div v-else class="flex flex-col items-center justify-center gap-4">
       <h1 class="text-center">Welcome To Pastentonne.</h1>

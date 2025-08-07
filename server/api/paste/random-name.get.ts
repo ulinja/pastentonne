@@ -56,7 +56,7 @@ export default defineEventHandler(async (event): Promise<string> => {
   let randomName = uuid4();
   const MAX_ITERATIONS = 1000;
   for (let i = 0; i < MAX_ITERATIONS; i++) {
-    let generatedName = generateName(adjectives, verbs, nouns);
+    const generatedName = generateName(adjectives, verbs, nouns);
     if (await textPasteNameAlreadyTaken(user.id, generatedName)) {
       continue;
     } else {
