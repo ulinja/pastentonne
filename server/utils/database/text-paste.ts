@@ -4,6 +4,11 @@ export async function getTextPaste(id: string): Promise<DbTextPaste | null> {
   return null;
 }
 
+export async function getTextPastesForUser(userId: string): Promise<DbTextPaste[]> {
+  const result = await useDrizzle().select().from(tables.textPaste).where(eq(tables.textPaste.userId, userId));
+  return result;
+}
+
 export async function deleteTextPaste(id: string): Promise<DbTextPaste | null> {
   const result = await useDrizzle().delete(tables.textPaste).where(eq(tables.textPaste.id, id)).returning();
   if (result.length > 0) return result[0];
