@@ -93,6 +93,7 @@ export const file = sqliteTable(
       .references(() => filePaste.id, { onDelete: "cascade" })
       .notNull(),
     name: text("name").notNull(),
+    mimeType: text("mime_type").notNull(),
   },
   (table) => [
     unique("file_file_paste_id_name_unique").on(table.filePasteId, table.name),

@@ -16,6 +16,15 @@ async function onClickRandomizeName(): Promise<void> {
 
 async function onSubmit(): Promise<void> {
   errorMessage.value = null;
+  if (!pasteName.value) {
+    errorMessage.value = "Please specify a name for your paste.";
+    return;
+  }
+  if (await checkIsPastenameTaken(pasteName.value)) {
+    errorMessage.value = "This paste name is already taken.";
+    return;
+  }
+
   try {
     const textPaste: DbTextPaste = await $fetch("/api/paste/text", {
       method: "POST",
