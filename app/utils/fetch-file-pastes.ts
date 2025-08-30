@@ -18,5 +18,6 @@ export default async function () {
       fatal: true,
     });
   }
+  if (data.value === undefined) throw new Error("No data");
   return data.value;
 }

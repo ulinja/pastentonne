@@ -32,11 +32,11 @@ const columns = [
   }),
   columnHelper.accessor("content", {
     header: "Content",
-    cell: (info) => truncateString(info.getValue()),
+    cell: (info) => truncateString(info.getValue() as string),
   }),
   columnHelper.accessor("createdAt", {
     header: "Created",
-    cell: (info) => formatDate(info.getValue(), false),
+    cell: (info) => formatDate(info.getValue() as Date, false),
   }),
   columnHelper.display({
     id: "delete",
