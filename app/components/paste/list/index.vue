@@ -12,13 +12,15 @@ import type { SortingState } from "@tanstack/vue-table";
 import PasteListDeleteButton from "./delete-button.vue";
 import NameLink from "./name-link.vue";
 
+type AnnotatedPaste = Awaited<ReturnType<typeof fetchTextPastes>> | Awaited<ReturnType<typeof fetchFilePastes>>
+
 interface Props {
-  pastes: DbTextPaste[];
+  pastes: Array<AnnotatedPaste>
 }
 const props = defineProps<Props>();
 const { pastes } = toRefs(props);
 
-const columnHelper = createColumnHelper<DbTextPaste>();
+const columnHelper = createColumnHelper<AnnotatedPaste>();
 const columns = [
   columnHelper.accessor("name", {
     header: "Name",
