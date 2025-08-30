@@ -13,12 +13,12 @@ import PasteListDeleteButton from "./delete-button.vue";
 import NameLink from "./name-link.vue";
 
 interface Props {
-  pastes: DbTextPaste[];
+  pastes: Awaited<ReturnType<typeof fetchPastes>>;
 }
 const props = defineProps<Props>();
 const { pastes } = toRefs(props);
 
-const columnHelper = createColumnHelper<DbTextPaste>();
+const columnHelper = createColumnHelper<Props['pastes'][number]>();
 const columns = [
   columnHelper.accessor("name", {
     header: "Name",
@@ -30,6 +30,7 @@ const columns = [
   }),
   columnHelper.accessor("content", {
     header: "Content",
+    // TODO: insert filepaste preview component if `type === "file"`
     cell: (info) => truncateString(info.getValue()),
   }),
   columnHelper.accessor("createdAt", {

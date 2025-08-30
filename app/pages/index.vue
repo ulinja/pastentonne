@@ -1,25 +1,10 @@
 <script setup lang="ts">
 const { loggedIn, user } = useUserSession();
 
-const textPastes = ref<DbTextPaste[] | null>();
+const pastes = ref<Awaited<ReturnType<typeof fetchPastes>> | []>([]);
 
 if (loggedIn.value) {
-  const { data, error } = await useFetch(`/api/paste/text`, {
-    transform: (data): DbTextPaste[] => {
-      return data.map((paste) => ({
-        ...paste,
-        createdAt: new Date(paste.createdAt),
-      }));
-    },
-  });
-  if (error.value) {
-    throw createError({
-      statusCode: error.value.statusCode,
-      statusText: error.value.statusText,
-      fatal: true,
-    });
-  }
-  textPastes.value = data.value;
+  pastes.value = await fetchPastes();
 }
 </script>
 
@@ -41,7 +26,7 @@ if (loggedIn.value) {
           </Button>
         </NuxtLink>
       </div>
-      <PasteList v-if="textPastes" :pastes="textPastes" class="mt-8" />
+      <PasteList v-if="pastes && pastes.length" :pastes="pastes" class="mt-8" />
     </div>
     <div v-else class="flex flex-col items-center justify-center gap-4">
       <h1 class="text-center">Welcome To Pastentonne.</h1>
